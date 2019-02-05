@@ -41,7 +41,6 @@ To help ensure this plugin is kept updated, new features are added and bugfixes 
 - [Installing](#installing)
   - [Using the CLI](#using-the-cli)
   - [PhoneGap Build](#phonegap-build)
-  - [Google API key for Android](#google-api-key-for-android)
   - [OKHTTP Library](#okhttp-library)
 - [Usage examples](#usage-examples)
   - [Simple usage](#simple-usage)
@@ -63,7 +62,6 @@ To help ensure this plugin is kept updated, new features are added and bugfixes 
     - [LAUNCH_MODE](#launch_mode)
   - [API methods](#api-methods)
     - [navigate()](#navigate)
-    - [enableDebug()](#enabledebug)
     - [isAppAvailable()](#isappavailable)
     - [availableApps()](#availableapps)
     - [getAppDisplayName()](#getappdisplayname)
@@ -117,7 +115,6 @@ To help ensure this plugin is kept updated, new features are added and bugfixes 
   - geocoding is disabled by passing `enableGeocoding: false` in the options object
   - there is no internet connection to perform the remote geocode operation
   - geocoding fails (e.g. an address cannot be found for the given lat/long coords)
-- Note that for geocoding to work on Android, a Google API key must be specified in order to use the Google Geocoder API service (see installation instructions below).
   
 ## Remember user's choice of navigation app
 
@@ -183,7 +180,7 @@ This plugin is a work in progress. I'd like it to support launching of as many p
 If there's another navigation app which you think should be explicitly supported and **it provides a mechanism to externally launch it**,
 open an issue containing a link or details of how the app should be invoked.
 
-**Don't** just open an issue saying "Add support for Blah" without first finding out if/how it can be externally launched.
+**Don't** just open an issue saying "Add support for Blah" without first find out if/how it can be externally launched.
 I don't have time to research launch mechanisms for every suggested app, so I will close such issues immediately.
 
 # Installing
@@ -196,29 +193,22 @@ This plugin is intended to launch **native** navigation apps and therefore will 
 
 ## Using the CLI
 
-    $ cordova plugin add uk.co.workingedge.phonegap.plugin.launchnavigator --variable GOOGLE_API_KEY_FOR_ANDROID="{your_api_key}"
-    $ phonegap plugin add uk.co.workingedge.phonegap.plugin.launchnavigator --variable GOOGLE_API_KEY_FOR_ANDROID="{your_api_key}"
-    $ ionic cordova plugin add uk.co.workingedge.phonegap.plugin.launchnavigator --variable GOOGLE_API_KEY_FOR_ANDROID="{your_api_key}"
+    $ cordova plugin add uk.co.workingedge.phonegap.plugin.launchnavigator
+    $ phonegap plugin add uk.co.workingedge.phonegap.plugin.launchnavigator
+    $ ionic cordova plugin add uk.co.workingedge.phonegap.plugin.launchnavigator
 
 ## PhoneGap Build
 
 Add the following xml to your config.xml to use the latest version of this plugin from [npm](https://www.npmjs.com/package/uk.co.workingedge.phonegap.plugin.launchnavigator):
 
-    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" >
-        <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="{your_api_key}" />
-    </plugin>
-
-## Google API key for Android
-- On Android, this plugin uses [Google's Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro) to geocode input addresses to lat/lon coordinates in order to support navigation apps which only allow input locations to be specified as lat/lon coordinates.
-- Google now requires that an API key be specified in order to use the Geocoding API, so you'll need to obtain an API key and specify it via the `GOOGLE_API_KEY_FOR_ANDROID` plugin variable during plugin installation.
-- For more information on how to obtain an API key, see the [Google documentation](https://developers.google.com/maps/documentation/geocoding/get-api-key).
+    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" />
 
 ## OKHTTP Library
-- This plugin uses the [OKHTTP library](https://square.github.io/okhttp/) on Android to access Google's remote Geocoding API service
+- This plugin uses the [OKHTTP library]() on Android to access Google's remove Geocoding service
 - The library is included at Android build time via Gradle
 - If another plugin in your Cordova project specifies a different version of the OKHTTP library than this plugin, this can cause a Gradle version collision leading to build failure. [See #193](https://github.com/dpa99c/phonegap-launch-navigator/issues/193).
 - You can override the default version of the library specified by this plugin by specifying the `OKHTTP_VERSION` plugin variable during plugin installation:
-    - `cordova plugin add uk.co.workingedge.phonegap.plugin.launchnavigator --variable GOOGLE_API_KEY_FOR_ANDROID="{your_api_key}" --variable OKHTTP_VERSION=1.2.3`
+    - `cordova plugin add uk.co.workingedge.phonegap.plugin.launchnavigator --variable OKHTTP_VERSION=1.2.3`
 - You can find the version of the library currently specified by this plugin [in the plugin.xml](https://github.com/dpa99c/phonegap-launch-navigator/blob/master/plugin.xml#L50)
 
 # Usage examples
@@ -469,6 +459,7 @@ Either:
     Specify using `launchnavigator.TRANSPORT_MODE` constants.
     - {boolean} enableGeocoding - (Android and iOS only) if true, and input location type(s) doesn't match those required by the app, use geocoding to obtain the address/coords as required. Defaults to true.
     - {boolean} enableGeolocation - (Windows only) if false, the plugin will NOT attempt to use the geolocation plugin to determine the current device position when the start location parameter is omitted. Defaults to true. 
+    - {boolean} enableDebug - if true, debug log output will be generated by the plugin. Defaults to false.
     - {object} extras - a key/value map of extra app-specific parameters. For example, to tell Google Maps on Android to display Satellite view in "maps" launch mode: `{"t": "k"}`
         - These will be appended to the URL used to invoke the app, e.g. `google_maps://?t=k&...`
         - See [Supported app URL scheme documentation wiki page](https://github.com/dpa99c/phonegap-launch-navigator/wiki/Supported-app-URL-scheme-documentation) for links to find app-specific parameters.
@@ -514,17 +505,6 @@ Either:
                     - Defaults to "Yes" if not specified.
                 - {string} noButtonText - text to display for the No button.
                     - Defaults to "No" if not specified.
-
-### enableDebug()
-
-Enables debug log output from the plugin to the JS and native consoles. By default debug is disabled.
-
-    launchnavigator.enableDebug(true, success, error);
-
-#### Parameters
-- {boolean} enabled - Whether to enable debug.
-- {function} success - callback to invoke on successfully setting debug.
-- {function} error - callback to invoke on error while setting debug. Will be passed a single string argument containing the error message.
 
 ### isAppAvailable()
 
@@ -749,7 +729,7 @@ There are several example projects in the [example repo](https://github.com/dpa9
 
 ## Windows
 
-- The plugin is compatible with Windows 10 on any PC or Windows 10 Mobile on a phone/tablet using the Universal .Net project generated by Cordova: `cordova platform add windows`
+- The plugin is compatible with Windows 8.1 or Windows 10 on any PC and on Windows Phone 8.0/8.1 using the Universal .Net project generated by Cordova: `cordova platform add windows` or `cordova platform add wp8` (for windows phone 8.0)
 
 - Bing Maps requires the user to press the enter key to initiate navigation if you don't provide the start location.
 Therefore, if a start location is not going to be passed to the plugin from your app, you should install the [Geolocation plugin](https://github.com/apache/cordova-plugin-geolocation) into your project.

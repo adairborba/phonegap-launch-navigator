@@ -1,8 +1,8 @@
 {
-    "version": "5.0.1",
+    "version": "4.2.2",
     "name": "uk.co.workingedge.phonegap.plugin.launchnavigator",
     "cordova_name": "Launch Navigator",
-    "description": "Cordova/Phonegap plugin to navigate to a destination using native navigation apps on Android, iOS, and Windows",
+    "description": "Cordova/Phonegap plugin to navigate to a destination using native navigation apps on Android, iOS, and Windows Phone",
     "author": "Dave Alden",
     "license": "MIT",
     "repository": {
@@ -14,6 +14,7 @@
         "platforms": [
           "android",
           "ios",
+          "wp8",
           "windows"
         ]
     },
@@ -25,6 +26,7 @@
         "ios",
         "android",
         "windows",
+        "wp8",
         "navigation",
         "navigator"
     ],
