@@ -32,12 +32,12 @@ var ln = {};
  * Internal properties
  *********************/
 
-var DEFAULT_appSelectionDialogHeaderText = "Select app for navigation",
-    DEFAULT_appSelectionCancelButtonText = "Cancel",
-    DEFAULT_rememberChoicePromptDialogHeaderText = "Remember your choice?",
-    DEFAULT_rememberChoicePromptDialogBodyText = "Use the same app for navigating next time?",
-    DEFAULT_rememberChoicePromptDialogYesButtonText = "Yes",
-    DEFAULT_rememberChoicePromptDialogNoButtonText = "No";
+var DEFAULT_appSelectionDialogHeaderText = "Escolha um app",
+    DEFAULT_appSelectionCancelButtonText = "Cancelar",
+    DEFAULT_rememberChoicePromptDialogHeaderText = "Lembrar sua escolha?",
+    DEFAULT_rememberChoicePromptDialogBodyText = "Usar o mesmo app para navegação na próxima vez?",
+    DEFAULT_rememberChoicePromptDialogYesButtonText = "Sim",
+    DEFAULT_rememberChoicePromptDialogNoButtonText = "Não";
 
 var store;
 
