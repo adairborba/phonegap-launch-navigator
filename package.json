@@ -1,5 +1,5 @@
 {
-    "version": "4.2.2",
+    "version": "4.2.1",
     "name": "uk.co.workingedge.phonegap.plugin.launchnavigator",
     "cordova_name": "Launch Navigator",
     "description": "Cordova/Phonegap plugin to navigate to a destination using native navigation apps on Android, iOS, and Windows Phone",
@@ -30,14 +30,5 @@
         "navigation",
         "navigator"
     ],
-    "types": "./uk.co.workingedge.phonegap.plugin.launchnavigator.d.ts",
-    "engines": {
-        "cordovaDependencies": {
-            "4.0.0": {
-                "cordova-ios": ">=4.3.0",
-                "cordova-android": ">=6.3.0",
-                "cordova": ">=7.1.0"
-            }
-        }
-    }
+    "types": "./uk.co.workingedge.phonegap.plugin.launchnavigator.d.ts"
 }
